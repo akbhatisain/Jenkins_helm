@@ -1,0 +1,40 @@
+annotations:
+  artifacthub.io/category: integration-delivery
+  artifacthub.io/changes: |
+    - Fix controller.sidecars.additionalSidecarContainers renaming and add tests
+  artifacthub.io/images: |
+    - name: jenkins
+      image: docker.io/jenkins/jenkins:rhel-ubi8-jdk11
+    - name: k8s-sidecar
+      image: docker.io/kiwigrid/k8s-sidecar:1.25.3
+    - name: inbound-agent
+      image: docker.io/jenkins/jenkins:rhel-ubi8-jdk11
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/links: |
+    - name: Chart Source
+      url: https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins
+    - name: Jenkins
+      url: https://www.jenkins.io/
+    - name: support
+      url: https://github.com/jenkinsci/helm-charts/issues
+apiVersion: v2
+appVersion: 2.426.3
+description: Jenkins - Build great things at any scale! The leading open source automation
+  server, Jenkins provides over 1800 plugins to support building, deploying and automating
+  any project.
+home: https://jenkins.io/
+icon: https://get.jenkins.io/art/jenkins-logo/logo.svg
+keywords:
+- jenkins
+- ci
+- devops
+maintainers:
+- email: localhost@gmail.com
+  name: localhost
+name: jenkins
+sources:
+- https://github.com/jenkinsci/jenkins
+- https://github.com/jenkinsci/docker-inbound-agent
+- https://github.com/maorfr/kube-tasks
+- https://github.com/jenkinsci/configuration-as-code-plugin
+version: 5.0.12
