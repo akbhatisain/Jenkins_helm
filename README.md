@@ -55,4 +55,7 @@ If you need install more plugins then you can define in value.yaml find the inst
 
 
 
-Reference another github repo: https://github.com/omerbsezer/Fast-Kubernetes/blob/main/K8s-Helm-Jenkins.md
+Reference another github repo:
+
+- https://github.com/omerbsezer/Fast-Kubernetes/blob/main/K8s-Helm-Jenkins.md
+- https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
