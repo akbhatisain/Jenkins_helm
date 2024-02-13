@@ -1,0 +1,69 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          id: "tom"
+          password: "{AQAAABAAAAAQata/idV0IRIBxVKKQN7Lb2GzCl1PAt+GwiJXeCMdlBA=}"
+          scope: GLOBAL
+          username: "tomcat"
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: true
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      jenkinsTunnel: "j1-jenkins-agent.jenkins.svc.cluster.local:50000"
+      jenkinsUrl: "http://j1-jenkins.jenkins.svc.cluster.local:8080"
+      name: "kubernetes"
+      namespace: "jenkins"
+      podLabels:
+      - key: "jenkins/j1-jenkins-agent"
+        value: "true"
+      serverUrl: "https://kubernetes.default"
+      templates:
+	@@ -32,51 +124,496 @@ jenkins:
+          envVars:
+          - envVar:
+              key: "JENKINS_URL"
+              value: "http://j1-jenkins.jenkins.svc.cluster.local:8080/"
+          image: "jenkins/inbound-agent:3206.vb_15dcf73f6a_9-3"
+          name: "jnlp"
+          resourceLimitCpu: "512m"
+          resourceLimitMemory: "512Mi"
+          resourceRequestCpu: "512m"
+          resourceRequestMemory: "512Mi"
+          workingDir: "/home/jenkins/agent"
+        id: "524cd9b170b8fbab8776abf9f16c71dacdff11335471721b0aa2253534fa86bd"
+        label: "j1-jenkins-agent"
+        name: "default"
+        namespace: "jenkins"
+        nodeUsageMode: "NORMAL"
+        podRetention: "never"
+        serviceAccount: "default"
+        slaveConnectTimeout: 100
+        slaveConnectTimeoutStr: "100"
+        yamlMergeStrategy: "override"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+  disableRememberMe: false
+  disabledAdministrativeMonitors:
+  - "hudson.util.DoubleLaunchChecker"
+  labelAtoms:
+  - name: "built-in"
+  - name: "j1-jenkins-agent"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  nodeMonitors:
+  - diskSpaceMonitor:
+      freeSpaceThreshold: "1GB"
+  - tmpSpace:
+      freeSpaceThreshold: "1GB"
+  numExecutors: 0
