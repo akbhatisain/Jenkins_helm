@@ -895,35 +895,25 @@ unclassified:
       yellowB: "#C4A000"
     globalColorMapName: "xterm"
 unclassified:
-  administrativeMonitorsConfiguration:
-    # Configuration for administrative monitors
-  ansiColorBuildWrapper:
+  administrativeMonitorsConfiguration: {}
+  ansiColorBuildWrapper: {}
   bitbucketPluginConfiguration:
     serverList:
-    - adminCredentialsId: "84135552-84e6-4e0f-a277-81d999f65f50"
-      baseUrl: "https://momcode.cgos.com"
-      id: "035bb831-b714-485a-8180-e1e6a0a9e0f0"
-      serverName: "jenkins_sandbox"
-    - adminCredentialsId: "27ca171e-b661-45c1-afd1-54ca8905e2c0"
-      baseUrl: "https://momcode.cgos.com"
-      id: "a1ac0188-fd70-47fc-9b57-70909e1c413d"
-      serverName: "momcode"
-    serverList:
-    - adminCredentialsId: "84135552-84e6-4e0f-a277-81d999f65f50"
-      baseUrl: "https://momcode.cgos.com"
-      id: "035bb831-b714-485a-8180-e1e6a0a9e0f0"
-      serverName: "jenkins_sandbox"
-    - adminCredentialsId: "27ca171e-b661-45c1-afd1-54ca8905e2c0"
-      baseUrl: "https://momcode.cgos.com"
-      id: "a1ac0188-fd70-47fc-9b57-70909e1c413d"
-      serverName: "momcode"
+      - adminCredentialsId: "84135552-84e6-4e0f-a277-81d999f65f50"
+        baseUrl: "https://momcode.cgos.com"
+        id: "035bb831-b714-485a-8180-e1e6a0a9e0f0"
+        serverName: "jenkins_sandbox"
+      - adminCredentialsId: "27ca171e-b661-45c1-afd1-54ca8905e2c0"
+        baseUrl: "https://momcode.cgos.com"
+        id: "a1ac0188-fd70-47fc-9b57-70909e1c413d"
+        serverName: "momcode"
   buildDiscarders:
     configuredBuildDiscarders:
-    - "jobBuildDiscarder"
+      - "jobBuildDiscarder"
   defaultFolderConfiguration:
     healthMetrics:
-    - worstChildHealthMetric:
-        recursive: true
+      - worstChildHealthMetric:
+          recursive: true
   enrichedSummaryConfig:
     enrichedSummaryEnabled: false
     httpClientDelayBetweenRetriesInSeconds: 1
@@ -941,18 +931,18 @@ unclassified:
     hookUrl: "https://op2-nf-ltst.cgos.com/github-webhook/"
   globalLibraries:
     libraries:
-    - defaultVersion: "2.1.0"
-      includeInChangesets: false
-      name: "bee-micro-libraries"
-      retriever:
-        modernSCM:
-          scm:
-            git:
-              credentialsId: "svcSF_Jenkins"
-              id: "e6dea0fa-2801-43b9-b433-e83962824f06"
-              remote: "https://momcode.cgos.com/scm/sdo/bee-micro-libraries.git"
-              traits:
-              - "gitTagDiscovery"
+      - defaultVersion: "2.1.0"
+        includeInChangesets: false
+        name: "bee-micro-libraries"
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                credentialsId: "svcSF_Jenkins"
+                id: "e6dea0fa-2801-43b9-b433-e83962824f06"
+                remote: "https://momcode.cgos.com/scm/sdo/bee-micro-libraries.git"
+                traits:
+                  - "gitTagDiscovery"
   injectionConfig:
     allowUntrusted: false
     checkForBuildAgentErrors: false
@@ -986,40 +976,40 @@ unclassified:
   sonarGlobalConfiguration:
     buildWrapperEnabled: false
     installations:
-    - name: "momcheck"
-      serverUrl: "https://momcheck.cgos.com:9004/"
-      triggers:
-        skipScmCause: false
-        skipUpstreamCause: false
+      - name: "momcheck"
+        serverUrl: "https://momcheck.cgos.com:9004/"
+        triggers:
+          skipScmCause: false
+          skipUpstreamCause: false
   whitelist:
     enabled: false
 tool:
   git:
     installations:
-    - home: "git"
-      name: "Default"
+      - home: "git"
+        name: "Default"
   maven:
     installations:
-    - name: "M3"
-      properties:
-      - installSource:
-          installers:
-          - maven:
-              id: "3.6.3"
+      - name: "M3"
+        properties:
+          - installSource:
+              installers:
+                - maven:
+                    id: "3.6.3"
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
   powerShellInstallation:
     installations:
-    - home: "powershell.exe"
-      name: "DefaultWindows"
-    - home: "pwsh"
-      name: "DefaultLinux"
+      - home: "powershell.exe"
+        name: "DefaultWindows"
+      - home: "pwsh"
+        name: "DefaultLinux"
   sonarRunnerInstallation:
     installations:
-    - name: "SonarScanner 4.6"
-      properties:
-      - installSource:
-          installers:
-          - sonarRunnerInstaller:
-              id: "4.6.1.2450"
+      - name: "SonarScanner 4.6"
+        properties:
+          - installSource:
+              installers:
+                - sonarRunnerInstaller:
+                    id: "4.6.1.2450"
