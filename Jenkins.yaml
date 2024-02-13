@@ -1,3 +1,32 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - string:
+          id: "github_token"
+          scope: GLOBAL
+          secret: "{AQAAABAAAAAwFnflMg2qCAbRUyDAGPvjcSIseb+rTfJGJtUfaZS1R6ofkiN0nua1xDl/HdcYL5j7T1Wwf0KLB8tNs6E3H4apbg==}"
+      - usernamePassword:
+          id: "tom"
+          password: "{AQAAABAAAAAQ1pZLuYMh0xbIk6k5Z9PGBwa6dEewL6GxwavpNIieUeY=}"
+          scope: GLOBAL
+          username: "tomcat"
+      - usernamePassword:
+          id: "zabbix"
+          password: "{AQAAABAAAAAQRdvxVNPU8EwBgTpLWZonc0kpssaMQtZHjSIS302oCY4=}"
+          scope: GLOBAL
+          username: "zabbix"
+      - usernamePassword:
+          id: "e1"
+          password: "{AQAAABAAAAAQfM+FgPiIk69u3UeBzA5JzH/0gtos8W/C/ZTvPGlmhQ4=}"
+          scope: GLOBAL
+          username: "ec2-user"
+      - usernamePassword:
+          id: "r1"
+          password: "{AQAAABAAAAAQ35XVWhxBSSeUCarQSqSymt3cqwmvyFqe45jzJ94GZ64=}"
+          scope: GLOBAL
+          username: "ubuntu"
+
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
