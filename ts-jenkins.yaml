@@ -901,23 +901,22 @@ unclassified:
     # Configuration for ANSI color build wrapper
   bitbucketEndpointConfiguration:
     endpoints:
-      - bitbucketServerEndpoint:
-          callChanges: false
-          credentialsId: "svcSF_Testing"
-          displayName: "momcode"
-          manageHooks: true
-          serverUrl: "https://momcode.cgos.com"
+    - bitbucketServerEndpoint:
+        callChanges: false
+        credentialsId: "svcSF_Testing"
+        displayName: "momcode"
+        manageHooks: true
+        serverUrl: "https://momcode.cgos.com"
   bitbucketPluginConfiguration:
     serverList:
-      - adminCredentialsId: "84135552-84e6-4e0f-a277-81d999f65f50"
-        baseUrl: "https://momcode.cgos.com"
-        id: "035bb831-b714-485a-8180-e1e6a0a9e0f0"
-        serverName: "jenkins_sandbox"
-      - adminCredentialsId: "27ca171e-b661-45c1-afd1-54ca8905e2c0"
-        baseUrl: "https://momcode.cgos.com"
-        id: "a1ac0188-fd70-47fc-9b57-70909e1c413d"
-        serverName: "momcode"
-
+    - adminCredentialsId: "84135552-84e6-4e0f-a277-81d999f65f50"
+      baseUrl: "https://momcode.cgos.com"
+      id: "035bb831-b714-485a-8180-e1e6a0a9e0f0"
+      serverName: "jenkins_sandbox"
+    - adminCredentialsId: "27ca171e-b661-45c1-afd1-54ca8905e2c0"
+      baseUrl: "https://momcode.cgos.com"
+      id: "a1ac0188-fd70-47fc-9b57-70909e1c413d"
+      serverName: "momcode"
   buildDiscarders:
     configuredBuildDiscarders:
     - "jobBuildDiscarder"
