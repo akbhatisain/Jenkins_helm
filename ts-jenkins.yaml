@@ -33,7 +33,7 @@ jenkins:
   - "Ping"
 authorizationStrategy:
   loggedInUsersCanDoAnything:
-    allowAnonymousRead: false
+    allowAnonymousRead: true
     projectMatrix:
       entries:
       - group:
