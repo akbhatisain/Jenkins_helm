@@ -803,7 +803,7 @@ security:
         - "org.jenkinsci.plugins.authorizeproject.strategy.AnonymousAuthorizationStrategy"
         enabledStrategies:
         - "org.jenkinsci.plugins.authorizeproject.strategy.TriggeringUsersAuthorizationStrategy"
-  sSHD:
+  SSHD:
     port: -1
   globalJobDslSecurityConfiguration:
     useScriptSecurity: true
