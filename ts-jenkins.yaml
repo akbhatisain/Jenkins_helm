@@ -792,7 +792,11 @@ security:
     allowedOnController: false
   gitHostKeyVerificationConfiguration:
     sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
-  queueItemAuthenticator:
+unclassified:
+  global:
+    queueItemAuthenticator: 
+      allowAnonymous: 
+        allow: false
     authenticators:
     - global:
         strategy: "triggeringUsersAuthorizationStrategy"
