@@ -1,29 +1,121 @@
-credentials:
-  system:
-    domainCredentials:
-    - credentials:
-      - usernamePassword:
-          id: "tom"
-          password: "{AQAAABAAAAAQata/idV0IRIBxVKKQN7Lb2GzCl1PAt+GwiJXeCMdlBA=}"
-          scope: GLOBAL
-          username: "tomcat"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
   authorizationStrategy:
     loggedInUsersCanDoAnything:
-      allowAnonymousRead: true
+      allowAnonymousRead: false
+    projectMatrix:
+      entries:
+      - group:
+          name: "FSG Configuration Management"
+          permissions:
+          - "Credentials/Update"
+          - "Credentials/View"
+          - "Overall/Read"
+      - group:
+          name: "FSG Noble Team"
+          permissions:
+          - "Overall/Administer"
+      - group:
+          name: "FSG Sunflower Engineering"
+          permissions:
+          - "Agent/Build"
+          - "Agent/Connect"
+          - "Credentials/View"
+          - "Job/Build"
+          - "Job/Cancel"
+          - "Job/Configure"
+          - "Job/Create"
+          - "Job/Move"
+          - "Job/Read"
+          - "Job/Workspace"
+          - "Overall/Read"
+          - "Run/Replay"
+          - "Run/Update"
+          - "SCM/Tag"
+          - "View/Configure"
+      - group:
+          name: "FSG Sunflower Program"
+          permissions:
+          - "Agent/Build"
+          - "Job/Discover"
+          - "Overall/Read"
+      - group:
+          name: "FSG Sunflower SecDevOps"
+          permissions:
+          - "Agent/Build"
+          - "Agent/Configure"
+          - "Agent/Connect"
+          - "Agent/Create"
+          - "Agent/Delete"
+          - "Agent/Disconnect"
+          - "Credentials/Create"
+          - "Credentials/Delete"
+          - "Credentials/ManageDomains"
+          - "Credentials/Update"
+          - "Credentials/View"
+          - "Job/Build"
+          - "Job/Cancel"
+          - "Job/Configure"
+          - "Job/Create"
+          - "Job/Delete"
+          - "Job/Discover"
+          - "Job/Move"
+          - "Job/Read"
+          - "Job/Workspace"
+          - "Lockable Resources/Reserve"
+          - "Lockable Resources/Unlock"
+          - "Lockable Resources/View"
+          - "Overall/Administer"
+          - "Overall/Read"
+          - "Run/Delete"
+          - "Run/Replay"
+          - "Run/Update"
+          - "SCM/Tag"
+          - "View/Configure"
+          - "View/Create"
+          - "View/Delete"
+          - "View/Read"
+      - group:
+          name: "Sunflower SAJE All Members"
+          permissions:
+          - "Agent/Build"
+          - "Credentials/Create"
+          - "Credentials/Update"
+          - "Credentials/View"
+          - "Job/Build"
+          - "Job/Configure"
+          - "Overall/Read"
+      - user:
+          name: "jrobiche"
+          permissions:
+          - "Agent/Build"
+          - "Job/Build"
+          - "Job/Cancel"
+          - "Job/Configure"
+          - "Job/Create"
+          - "Job/Delete"
+          - "Job/Discover"
+          - "Job/Move"
+          - "Job/Read"
+          - "Job/Workspace"
+          - "Overall/Read"
+          - "Run/Update"
+      - user:
+          name: "svcSF_Jenkins"
+          permissions:
+          - "Overall/Read"  
   clouds:
   - kubernetes:
       containerCap: 10
       containerCapStr: "10"
-      jenkinsTunnel: "j1-jenkins-agent.jenkins.svc.cluster.local:50000"
-      jenkinsUrl: "http://j1-jenkins.jenkins.svc.cluster.local:8080"
+      jenkinsTunnel: "jenkins-agent.jenkins.svc.cluster.local:50000"
+      jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
       name: "kubernetes"
       namespace: "jenkins"
       podLabels:
-      - key: "jenkins/j1-jenkins-agent"
+      - key: "jenkins/jenkins-jenkins-agent"
         value: "true"
       serverUrl: "https://kubernetes.default"
       templates:
@@ -32,19 +124,19 @@ jenkins:
           envVars:
           - envVar:
               key: "JENKINS_URL"
-              value: "http://j1-jenkins.jenkins.svc.cluster.local:8080/"
-          image: "jenkins/inbound-agent:3206.vb_15dcf73f6a_9-3"
+              value: "http://jenkins.jenkins.svc.cluster.local:8080/"
+          image: "jenkins/inbound-agent:3192.v713e3b_039fb_e-5"
           name: "jnlp"
           resourceLimitCpu: "512m"
           resourceLimitMemory: "512Mi"
           resourceRequestCpu: "512m"
           resourceRequestMemory: "512Mi"
           workingDir: "/home/jenkins/agent"
-        id: "524cd9b170b8fbab8776abf9f16c71dacdff11335471721b0aa2253534fa86bd"
-        label: "j1-jenkins-agent"
+        id: "5c818f7e45827c1482495241d9113240406a9d784c7b1a3631d9fa9106d57e8d"
+        label: "jenkins-jenkins-agent"
         name: "default"
         namespace: "jenkins"
-        nodeUsageMode: "NORMAL"
+        nodeUsageMode: NORMAL
         podRetention: "never"
         serviceAccount: "default"
         slaveConnectTimeout: 100
@@ -52,24 +144,463 @@ jenkins:
         yamlMergeStrategy: "override"
   crumbIssuer:
     standard:
-      excludeClientIPFromCrumb: true
+      excludeClientIPFromCrumb: false
   disableRememberMe: false
   disabledAdministrativeMonitors:
+  - "jenkins.diagnostics.ControllerExecutorsAgents"
+  - "hudson.diagnosis.ReverseProxySetupMonitor"
   - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
+  - name: "AnsibleControl"
+  - name: "AnsibleControl_develop"
+  - name: "AnsibleControl_production"
+  - name: "Linux_x86_64"
+  - name: "MSEMAN-F27115"
+  - name: "Mobile_Build"
+  - name: "OP2-SNF-LTST47"
+  - name: "OP2-SNF-TEST21"
+  - name: "OP2-SNF-TEST60"
+  - name: "ReadyAPI"
+  - name: "Solaris_SPARC"
+  - name: "TestExecute"
+  - name: "Windows_x86_64"
+  - name: "Winx64_Oracle12.2.1.3"
   - name: "built-in"
-  - name: "j1-jenkins-agent"
+  - name: "modern_git"
+  - name: "op2-snf-dev15"
+  - name: "op2-snf-dev20"
+  - name: "op2-snf-ldev4"
+  - name: "op2-snf-ltst10"
+  - name: "op2-snf-ltst56"
+  - name: "op2-snf-ltst59"
+  - name: "op2-snf-ltst60"
+  - name: "op2-snf-sn1"
+  - name: "jenkins-jenkins-agent"
+  labelString: "Linux (amd64) Winx64_Oracle12.2.1.3 op2-snf-ltst64"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
+  noUsageStatistics: true
   nodeMonitors:
   - diskSpaceMonitor:
       freeSpaceThreshold: "1GB"
   - tmpSpace:
       freeSpaceThreshold: "1GB"
-  numExecutors: 0
+  nodeProperties:
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  - envVars:
+      env:
+      - key: "MAVEN_OPTS"
+  nodes:
+  - permanent:
+      labelString: "MSEMAN-F27115"
+      launcher:
+        inbound:
+          workDirSettings:
+            disabled: false
+            failIfWorkDirIsMissing: false
+            internalDir: "remoting"
+      mode: EXCLUSIVE
+      name: "MSEMAN-F27115"
+      nodeDescription: "Matthew Seman's Laptop to run TestComplete due to licensing."
+      remoteFS: "c:\\apps\\jenkins"
+      retentionStrategy:
+        demand:
+          idleDelay: 30
+          inDemandDelay: 0
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: "jenkins-agent"
+          host: "OP2-SNF-LTST47"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      name: "OP2-SNF-LTST47"
+      remoteFS: "/opt/jenkins-agent"
+      retentionStrategy:
+        demand:
+          idleDelay: 30
+          inDemandDelay: 0
+  - permanent:
+      labelString: "Mobile_Build"
+      launcher:
+        ssh:
+          credentialsId: "svcSF_Jenkins"
+          host: "OP2-SNF-TEST21"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "OP2-SNF-TEST21"
+      nodeDescription: "Mobile build node"
+      nodeProperties:
+      - authorizationMatrix:
+          entries:
+          - group:
+              name: "FSG Sunflower Engineering"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Connect"
+          - group:
+              name: "FSG Sunflower SecDevOps"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          inheritanceStrategy: "inheritingGlobal"
+      numExecutors: 4
+      remoteFS: "C:\\Users\\svcsf_jenkins\\jenkins"
+      retentionStrategy:
+        demand:
+          idleDelay: 15
+          inDemandDelay: 0
+  - permanent:
+      labelString: "ReadyAPI OP2-SNF-TEST60"
+      launcher:
+        ssh:
+          credentialsId: "svcSF_Jenkins"
+          host: "OP2-SNF-TEST60"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "OP2-SNF-TEST60"
+      nodeDescription: "ReadyAPI server used to execute ReadyAPI scripts"
+      numExecutors: 2
+      remoteFS: "C:\\Users\\svcsf_jenkins\\jenkins"
+      retentionStrategy:
+        demand:
+          idleDelay: 60
+          inDemandDelay: 0
+  - permanent:
+      labelString: "TestExecute op2-snf-dev20 ReadyAPI"
+      launcher:
+        ssh:
+          credentialsId: "svcSF_Jenkins"
+          host: "op2-snf-dev20"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "op2-snf-dev20"
+      nodeDescription: "Matthew Seman's Twin. Used to execute test scripts."
+      numExecutors: 2
+      remoteFS: "c:\\apps\\jenkins"
+      retentionStrategy:
+        demand:
+          idleDelay: 60
+          inDemandDelay: 0
+  - permanent:
+      labelString: "Linux_x86_64"
+      launcher:
+        ssh:
+          credentialsId: "jenkins-agent"
+          host: "op2-snf-ldev4"
+          javaPath: "/etc/alternatives/jre_11/bin/java"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "op2-snf-ldev4"
+      nodeDescription: "Linux x86-64 Build Server for Oracle Forms and Java apps"
+      nodeProperties:
+      - authorizationMatrix:
+          entries:
+          - group:
+              name: "FSG Noble Team"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Engineering"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Program"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Connect"
+              - "Agent/Disconnect"
+          inheritanceStrategy: "inheritingGlobal"
+      - toolLocation:
+          locations:
+          - home: "/bin/git"
+            key: "hudson.plugins.git.GitTool$DescriptorImpl@Default"
+      remoteFS: "/opt/jenkins-agent"
+      retentionStrategy:
+        demand:
+          idleDelay: 15
+          inDemandDelay: 0
+  - permanent:
+      labelString: "AnsibleControl"
+      launcher:
+        ssh:
+          credentialsId: "jenkins-agent"
+          host: "op2-snf-ltst10"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "op2-snf-ltst10"
+      nodeDescription: "Ansible control node for Sunflower"
+      nodeProperties:
+      - authorizationMatrix:
+          entries:
+          - group:
+              name: "FSG Noble Team"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Engineering"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Connect"
+          - group:
+              name: "FSG Sunflower SecDevOps"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          inheritanceStrategy: "inheritingGlobal"
+      numExecutors: 10
+      remoteFS: "/opt/jenkins-agent"
+      retentionStrategy:
+        demand:
+          idleDelay: 15
+          inDemandDelay: 0
+  - permanent:
+      labelString: "modern_git"
+      launcher:
+        ssh:
+          credentialsId: "jenkins-agent"
+          host: "op2-snf-ltst56"
+          javaPath: "/etc/alternatives/jre_11/bin/java"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "op2-snf-ltst56"
+      nodeDescription: "Linux x86-64 Build Server for Infrastructure"
+      nodeProperties:
+      - authorizationMatrix:
+          entries:
+          - group:
+              name: "FSG Noble Team"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Engineering"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Program"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Connect"
+              - "Agent/Disconnect"
+          inheritanceStrategy: "inheritingGlobal"
+      - toolLocation:
+          locations:
+          - home: "/bin/git"
+            key: "hudson.plugins.git.GitTool$DescriptorImpl@Default"
+      remoteFS: "/opt/jenkins-agent"
+      retentionStrategy:
+        demand:
+          idleDelay: 15
+          inDemandDelay: 0
+  - permanent:
+      labelString: "AnsibleControl_develop"
+      launcher:
+        ssh:
+          credentialsId: "jenkins-agent"
+          host: "op2-snf-ltst59"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "op2-snf-ltst59"
+      nodeDescription: "Development Ansible control node for Sunflower"
+      nodeProperties:
+      - authorizationMatrix:
+          entries:
+          - group:
+              name: "FSG Noble Team"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Engineering"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Connect"
+          - group:
+              name: "FSG Sunflower SecDevOps"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          inheritanceStrategy: "inheritingGlobal"
+      - envVars:
+          env:
+          - key: "MAVEN_OPTS"
+      numExecutors: 4
+      remoteFS: "/opt/jenkins-agent"
+      retentionStrategy:
+        demand:
+          idleDelay: 120
+          inDemandDelay: 0
+  - permanent:
+      labelString: "AnsibleControl_production"
+      launcher:
+        ssh:
+          credentialsId: "jenkins-agent"
+          host: "op2-snf-ltst60"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "op2-snf-ltst60"
+      nodeDescription: "Production Ansible control node for Sunflower"
+      nodeProperties:
+      - authorizationMatrix:
+          entries:
+          - group:
+              name: "FSG Noble Team"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Engineering"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Connect"
+          - group:
+              name: "FSG Sunflower SecDevOps"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          inheritanceStrategy: "inheritingGlobal"
+      - envVars:
+          env:
+          - key: "MAVEN_OPTS"
+      numExecutors: 4
+      remoteFS: "/opt/jenkins-agent"
+      retentionStrategy:
+        demand:
+          idleDelay: 120
+          inDemandDelay: 0
+  - permanent:
+      labelString: "Solaris_SPARC"
+      launcher:
+        ssh:
+          credentialsId: "oracle_op2-snf-sn1"
+          host: "op2-snf-sn1"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "op2-snf-sn1"
+      nodeDescription: "Solaris 11.4 environment for Sunflower Assets Form Compilation."
+      nodeProperties:
+      - authorizationMatrix:
+          entries:
+          - group:
+              name: "FSG Noble Team"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Engineering"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Configure"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+          - group:
+              name: "FSG Sunflower Program"
+              permissions:
+              - "Agent/Build"
+              - "Agent/Disconnect"
+          inheritanceStrategy: "inheritingGlobal"
+      - envVars:
+          env:
+          - key: "JAVA_HOME"
+            value: "/opt/jenkins-agent/jdk"
+          - key: "PATH"
+            value: "/usr/bin:/usr/sbin:/opt/csw/bin"
+      - toolLocation:
+          locations:
+          - home: "/usr/bin/git"
+            key: "hudson.plugins.git.GitTool$DescriptorImpl@Default"
+      remoteFS: "/opt/jenkins-agent/bin"
+      retentionStrategy:
+        demand:
+          idleDelay: 8
+          inDemandDelay: 0
+  numExecutors: 8      
   primaryView:
     all:
+      description: "This is the main Jenkins Instance for Sunflower.\r\n\r\nSubmit\
+        \ a service request if there are any questions regarding this instance here:\r\
+        \nCustomer=Sunflower\r\nhttps://alm.cgos.com/projects/servicedesk/customer/portal/96/create/1361"
       name: "all"
   projectNamingStrategy: "standard"
   quietPeriod: 5
@@ -77,6 +608,12 @@ jenkins:
     enabled: true
   scmCheckoutRetryCount: 0
   securityRealm:
+    activeDirectory:
+      customDomain: false
+      groupLookupStrategy: AUTO
+      removeIrrelevantGroups: false
+      requireTLS: true
+      startTls: true
     local:
       allowsSignup: false
       enableCaptcha: false
@@ -91,36 +628,122 @@ jenkins:
             providerId: "default"
         - "timezone"
         - "experimentalFlags"
-      - id: "user1"
-        name: "user1"
-        properties:
-        - "apiToken"
-        - "myView"
-        - preferredProvider:
-            providerId: "default"
-        - "timezone"
-        - "experimentalFlags"
-        - mailer:
-            emailAddress: "user@local.com"
-      - id: "user2"
-        name: "user2"
-        properties:
-        - "apiToken"
-        - "myView"
-        - preferredProvider:
-            providerId: "default"
-        - "timezone"
-        - "experimentalFlags"
-        - mailer:
-            emailAddress: "user2@localhost.com"
-  slaveAgentPort: 50000
-  systemMessage: "this jenkins server run as a pod"
+  slaveAgentPort: 0
   updateCenter:
     sites:
     - id: "default"
-      url: "https://updates.jenkins.io/update-center.json"
+      url: "http://updates.jenkins.io/update-center.json"
   views:
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      jobNames:
+      - "Compile Custom Form"
+      - "Deploy Release Candidate"
+      - "Deploy Released Non-Infra Assets Patch"
+      - "Full Build"
+      - "Infrastructure Patch"
+      - "Infrastructure Update"
+      name: "3.0 Build Pipelines"
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      description: "Automation testing pipelines using Smartbear Test Execute"
+      jobNames:
+      - "Dev - AutoTest"
+      - "Forms_Regression"
+      - "Import Seed Data"
+      - "Performance_Testing_Automation"
+      - "ReadyAPI Test Pipeline"
+      - "Reports_UI_Regression"
+      - "TestFLO integration test"
+      - "Webapp_Automated_Tests"
+      - "Work_Management_Automation"
+      name: "Automation Testing Pipelines"
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      description: "John Hanely's Development Pipelines."
+      includeRegex: "JHDev.*"
+      jobNames:
+      - "JHDev - Infrastructure Update"
+      - "SFD-11317"
+      name: "John"
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      description: "MMicro Jobs for Sunflower"
+      name: "Microservices"
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      description: "Development pipelines accessible to only Sunflower SecDevOps members."
+      includeRegex: "^Dev"
+      jobNames:
+      - "ansible"
+      - "Deploy Base Server"
+      - "Deploy Docker Server"
+      - "Dev - Compile Custom Form"
+      - "Dev - Create Sunflower PDB"
+      - "Dev - Deploy Base Server"
+      - "Dev - Deploy Docker Server"
+      - "Dev - Deploy Release Candidate"
+      - "Dev - Deploy Released Non-Infra Assets Patch"
+      - "Dev - Deploy Sunflower Assets Server"
+      - "Dev - Forms_Regression"
+      - "Dev - Full Build"
+      - "Dev - Import Seed Data"
+      - "Dev - Install Docker"
+      - "Dev - Install Fusion Middleware"
+      - "Dev - Install Sunflower Assets"
+      - "Dev - Performance_Testing_Automation"
+      - "Dev - Reports_UI_Regression"
+      - "Dev - Test Code Signing Cert"
+      - "Dev - Webapp_Automated_Tests"
+      - "Dev - Work_Management_Automation"
+      - "Install Docker"
+      - "SonarQubeTest"
+      - "Start Sunflower"
+      name: "Sunflower SecDevOps"
   - all:
+      description: "This is the main Jenkins Instance for Sunflower.\r\n\r\nSubmit\
+        \ a service request if there are any questions regarding this instance here:\r\
+        \nCustomer=Sunflower\r\nhttps://alm.cgos.com/projects/servicedesk/customer/portal/96/create/1361"
       name: "all"
   viewsTabBar: "standard"
 globalCredentialsConfiguration:
@@ -140,8 +763,28 @@ security:
     allowedOnController: false
   gitHostKeyVerificationConfiguration:
     sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: "triggeringUsersAuthorizationStrategy"
+    - project:
+        disabledStrategies:
+        - "org.jenkinsci.plugins.authorizeproject.strategy.SpecificUsersAuthorizationStrategy"
+        - "org.jenkinsci.plugins.authorizeproject.strategy.SystemAuthorizationStrategy"
+        - "org.jenkinsci.plugins.authorizeproject.strategy.AnonymousAuthorizationStrategy"
+        enabledStrategies:
+        - "org.jenkinsci.plugins.authorizeproject.strategy.TriggeringUsersAuthorizationStrategy"
+  sSHD:
+    port: -1
   globalJobDslSecurityConfiguration:
     useScriptSecurity: true
+  scriptApproval:
+    approvedScriptHashes:
+    - "SHA512:2aa3a00d78b7a15cb2f41943f2ab8f14888c84b2af4707fc2722596bd5ba50b28ad0a043ae9fdede8d5fe7412b0c190d6cc9940289cff77c7c91efdab8a2df72"
+    - "SHA512:60b18f3b581f2ace9d78399c170063dc547a25a98b12aacaaf7a350151bce17d7d388587f2fffb0f5e8c5b931f9e2753f1aee317d673532a80be81a953d9b35e"
+    - "SHA512:8aa14c7fe9b98dc2363df1379adc652a92e4c7ace7656908f06bf4a3f34b92a7e2dce4165325295935689cdfb205e19a23f8c3a489374ece3a6d7a26d5f34638"
+    - "SHA512:f64b46d720bd83526e51d261237aebc54da305edd89cc61952b95e32155fb7394309fae46d858e45b67528441c6ade909c608af59863c1519ee5e95bebef9830"
+    - "field java.lang.String value"
 unclassified:
   ansiColorBuildWrapper:
     colorMaps:
@@ -217,21 +860,61 @@ unclassified:
       whiteB: "#D3D7CF"
       yellow: "#C4A000"
       yellowB: "#C4A000"
+    globalColorMapName: "xterm"
+  bitbucketEndpointConfiguration:
+    endpoints:
+    - bitbucketServerEndpoint:
+        callChanges: false
+        credentialsId: "svcSF_Testing"
+        displayName: "momcode"
+        manageHooks: true
+        serverUrl: "https://momcode.cgos.com"
+  bitbucketPluginConfiguration:
+    serverList:
+    - adminCredentialsId: "84135552-84e6-4e0f-a277-81d999f65f50"
+      baseUrl: "https://momcode.cgos.com"
+      id: "035bb831-b714-485a-8180-e1e6a0a9e0f0"
+      serverName: "jenkins_sandbox"
+    - adminCredentialsId: "27ca171e-b661-45c1-afd1-54ca8905e2c0"
+      baseUrl: "https://momcode.cgos.com"
+      id: "a1ac0188-fd70-47fc-9b57-70909e1c413d"
+      serverName: "momcode"
   buildDiscarders:
     configuredBuildDiscarders:
     - "jobBuildDiscarder"
+  defaultFolderConfiguration:
+    healthMetrics:
+    - worstChildHealthMetric:
+        recursive: true
   enrichedSummaryConfig:
     enrichedSummaryEnabled: false
     httpClientDelayBetweenRetriesInSeconds: 1
     httpClientMaxRetries: 3
     httpClientTimeoutInSeconds: 1
+  cacheConfig:
+    cacheGetJobs: false
+    cacheGetJobsMinutes: 0
   fingerprints:
     fingerprintCleanupDisabled: false
     storage: "file"
   gitHubConfiguration:
     apiRateLimitChecker: ThrottleForNormalize
   gitHubPluginConfig:
-    hookUrl: "http://j1-jenkins:8080/github-webhook/"
+    hookUrl: "https://op2-nf-ltst.cgos.com/github-webhook/"
+  globalLibraries:
+    libraries:
+    - defaultVersion: "2.1.0"
+      includeInChangesets: false
+      name: "bee-micro-libraries"
+      retriever:
+        modernSCM:
+          scm:
+            git:
+              credentialsId: "svcSF_Jenkins"
+              id: "e6dea0fa-2801-43b9-b433-e83962824f06"
+              remote: "https://momcode.cgos.com/scm/sdo/bee-micro-libraries.git"
+              traits:
+              - "gitTagDiscovery"
   injectionConfig:
     allowUntrusted: false
     checkForBuildAgentErrors: false
@@ -242,8 +925,8 @@ unclassified:
   junitTestResultStorage:
     storage: "file"
   location:
-    adminAddress: "jenkins@localhost.com"
-    url: "http://j1-jenkins:8080/"
+    adminAddress: "address not configured yet <nobody@nowhere>"
+    url: "http://jenkins:8080/"
   mailer:
     charset: "UTF-8"
     useSsl: false
@@ -257,16 +940,34 @@ unclassified:
     allowSecondFetch: false
     createAccountBasedOnEmail: false
     disableGitToolChooser: false
+    globalConfigEmail: "ESGSunflowerSecDevOps@cgos.com"
+    globalConfigName: "op2-snf-ltst64"
     hideCredentials: false
     showEntireCommitSummaryInChanges: false
     useExistingAccountWithSameEmail: false
   sonarGlobalConfiguration:
     buildWrapperEnabled: false
+    installations:
+    - name: "momcheck"
+      serverUrl: "https://momcheck.cgos.com:9004/"
+      triggers:
+        skipScmCause: false
+        skipUpstreamCause: false
+  whitelist:
+    enabled: false
 tool:
   git:
     installations:
     - home: "git"
       name: "Default"
+  maven:
+    installations:
+    - name: "M3"
+      properties:
+      - installSource:
+          installers:
+          - maven:
+              id: "3.6.3"
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
@@ -276,3 +977,11 @@ tool:
       name: "DefaultWindows"
     - home: "pwsh"
       name: "DefaultLinux"
+  sonarRunnerInstallation:
+    installations:
+    - name: "SonarScanner 4.6"
+      properties:
+      - installSource:
+          installers:
+          - sonarRunnerInstaller:
+              id: "4.6.1.2450"
